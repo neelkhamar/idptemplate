@@ -5,7 +5,7 @@ metadata:
   title: Deploy service
   description: A template to Deploy service
 spec:
-  owner: deepesh.kumar@harness.io
+  owner: c_neel.khamar@harness.io
   type: service
   parameters:
     - title: Deploy service
