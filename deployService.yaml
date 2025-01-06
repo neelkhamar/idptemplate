@@ -1,9 +1,12 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: deploy-demo-service
-  title: Deploy service
-  description: A template to Deploy service
+  name: IconTest
+  title: IconTest
+  description: A template to test GitSync variables
+  links:
+    - url: www.google.com
+      icon: wiz
 spec:
   owner: c_neel.khamar@harness.io
   type: service
