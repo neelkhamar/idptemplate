@@ -5,7 +5,7 @@ metadata:
   title: IconTest
   description: A template to test GitSync variables
   links:
-    - url: www.google.com
+    - url: https://www.google.com
       icon: wiz
 spec:
   owner: c_neel.khamar@harness.io
