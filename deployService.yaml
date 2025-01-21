@@ -1,8 +1,8 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: DeployServiceTest
-  title: Deploy Service Test
+  name: NewDeployServiceTest
+  title: New Deploy Service Test
   description: Template for deploying services to Devspace
   tags:
     - deploy
