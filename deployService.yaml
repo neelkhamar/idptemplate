@@ -1,49 +1,50 @@
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: IconTest
-  title: IconTest
-  description: A template to test GitSync variables
-  links:
-    - url: https://www.google.com
-      icon: wiz
+  name: DeployServiceTest
+  title: Deploy Service Test
+  description: Template for deploying services to Devspace
+  tags:
+    - deploy
+    - harness
+    - devspace
 spec:
-  owner: c_neel.khamar@harness.io
-  type: service
-  parameters:
-    - title: Deploy service
-      required:
-        - username
-        - version
-        - api_key
-      properties:
-        username:
-          title: Username
-          type: string
-        api_key:
-          title: API Key
-          type: string
-        token:
-          title: Harness Token
-          type: string
-          ui:widget: password
-          ui:field: HarnessAuthToken
-        version:
-          title: Version
-          type: string
-  steps:
-    - id: trigger
-      name: Run Deploy service
-      action: trigger:harness-custom-pipeline
-      input:
-        url: https://qa.harness.io/ng/account/zEaak-FLS425IEO7OLzMUg/all/orgs/default/projects/Deepesh_CDE/pipelines/workflowtest/pipeline-studio?storeType=INLINE
-        inputset:
-          "username": ${{ parameters.username }}
-          "pipeline.stages.deploy.variables.version": ${{ parameters.version }}
-          "pipeline.stages.deploy.spec.execution.steps.ShellScript_1.spec.environmentVariables.scriptVar": ${{ parameters.username }}
-        apikey: ${{ parameters.api_key }}
-        token: ${{ parameters.token }}
-  output:
-    links:
-      - title: Pipeline Details
-        url: ${{ steps.trigger.output.PipelineUrl }}
+  owner: c_neel.khamar@harness.io
+  type: service
+  parameters:
+    - title: Trigger deployment
+      required:
+        - UserId
+      properties:
+        environment: 
+          title: Environment
+          type: string
+          default: Devspaces
+        infrastructure:
+          title: Infrastructure
+          type: string
+          default: infra
+        UserId:
+          title: UserId
+          type: string
+          description: Enter your name alias example if your name is John Smith, then enter johns and for snapshot just snapshot
+        token:
+          title: Harness Token
+          type: string
+          ui:widget: password
+          ui:field: HarnessAuthToken
+  steps:
+    - id: trigger
+      name: Trigger Deployment
+      action: trigger:harness-custom-pipeline
+      input:
+        url: https://qa.harness.io/ng/account/zEaak-FLS425IEO7OLzMUg/all/orgs/default/projects/Deepesh_CDE/pipelines/dynamicenv/pipeline-studio?storeType=INLINE
+        inputset:
+          USERID: ${{ parameters.UserId }}
+          pipeline.stages.PreDep.spec.environment.environmentRef: ${{ parameters.environment }}
+          pipeline.stages.PreDep.spec.environment.infrastructureDefinitions: ${{ parameters.infrastructure }}
+        apiKeySecret: dummydeepesh
+  output:
+    links:
+      - title: Pipeline Details
+        url: ${{ steps.trigger.output.PipelineUrl }}
